@@ -22,10 +22,17 @@ export class LeafletPage implements OnInit {
     accessToken: 'pk.eyJ1IjoiNzAzcHZydGN4IiwiYSI6ImNraG1qZ3EwOTBnN2kycHFxMzZmbjVpMngifQ.JjLGH4023AtntYZoKcQSVw'
    
 }).addTo(mymap);
+
+var marker = L.marker([-25.7450,28.18703]).addTo(mymap);
+var circle = L.circle([-25.7446, 28.18783], {
+  color: 'red',
+  fillColor: '#f03',
+  fillOpacity: 0.5,
+  radius: 500
+}).addTo(mymap);
+
+
   }
 
 
-  goMaps(){
-    this.router.navigateByUrl('maps');
-  }
 }
