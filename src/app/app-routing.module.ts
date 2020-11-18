@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './menu/tabs/tabs.page';
+import { MapsPage } from './page/maps/maps.page';
+import  { LeafletPage } from './page/leaflet/leaflet.page';
 
 const routes: Routes = [
   {
@@ -19,6 +21,10 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./menu/tabs/tabs.module').then( m => m.TabsPageModule)
+  },
+  {
+    path: 'leaflet',
+    loadChildren: () => import('./page/leaflet/leaflet.module').then( m => m.LeafletPageModule)
   },
   {
     path: 'tabs', component: TabsPage, children: [
@@ -46,12 +52,13 @@ const routes: Routes = [
         path: 'maps',
         loadChildren: () => import('./page/maps/maps.module').then( m => m.MapsPageModule)
       },
+      {
+        path: 'leaflet',
+        loadChildren: () => import('./page/leaflet/leaflet.module').then( m => m.LeafletPageModule)
+      },
+
     ]
   },  
-  
-  
- 
-
 ];
 
 @NgModule({

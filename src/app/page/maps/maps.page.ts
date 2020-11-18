@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare var mapboxgl;
 
 @Component({
@@ -8,13 +9,14 @@ declare var mapboxgl;
 })
 export class MapsPage implements OnInit {
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiNzAzcHZydGN4IiwiYSI6ImNraG1qZ3EwOTBnN2kycHFxMzZmbjVpMngifQ.JjLGH4023AtntYZoKcQSVw';
     var map = new mapboxgl.Map({
           container: 'map',
-           style: 'mapbox://styles/mapbox/streets-v11'
+           style: 'mapbox://styles/mapbox/streets-v11',
+           center: [-74.5, 40], // starting position [lng, lat]
       });
       map.addControl(new  mapboxgl.NavigationControl());
 
@@ -26,9 +28,8 @@ export class MapsPage implements OnInit {
         trackUserLocation: true 
         })
         );
-
   }
-  
-
-
+  goLeaflet(){
+    this.router.navigateByUrl('leaflet');
+  }
 } 
