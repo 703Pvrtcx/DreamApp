@@ -42,8 +42,14 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: () => import('./page/settings/settings.module').then( m => m.SettingsPageModule)
       },
+      {
+        path: 'maps',
+        loadChildren: () => import('./page/maps/maps.module').then( m => m.MapsPageModule)
+      },
     ]
-  },   
+  },  
+  
+  
  
 
 ];

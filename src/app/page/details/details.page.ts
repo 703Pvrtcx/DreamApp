@@ -37,7 +37,7 @@ export class DetailsPage implements OnInit {
 
   
   goSignOut(){
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('login');
   }
   getPerson(person){
     console.log(person);
