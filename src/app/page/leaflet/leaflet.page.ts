@@ -31,6 +31,8 @@ var circle = L.circle([-25.7446, 28.18783], {
   radius: 500
 }).addTo(mymap);
 
+marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+circle.bindPopup("I am a circle.");
 
   }
 
