@@ -16,7 +16,7 @@ export class MapsPage implements OnInit {
     var map = new mapboxgl.Map({
           container: 'map',
            style: 'mapbox://styles/mapbox/streets-v11',
-           center: [-74.5, 40], // starting position [lng, lat]
+           center: [-25.483435,27.836194], // starting position [lng, lat]
       });
       map.addControl(new  mapboxgl.NavigationControl());
 
