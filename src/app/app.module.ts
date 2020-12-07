@@ -1,32 +1,25 @@
+import { TabsPage } from './page/menu/tabs/tabs.page';
+import { SidemenuPage } from './page/menu/sidemenu/sidemenu.page';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { CartService } from './services/cart/cart.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import firebase from 'firebase/app';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-
+import {HttpClientModule} from '@angular/common/http';
+import { ItemListPage } from './page/Store/item-list/item-list.page';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SidemenuPage, TabsPage, ItemListPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(), 
-    AngularFireAuthModule, AngularFireStorageModule, 
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
-  ],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen,CartService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

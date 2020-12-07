@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart/cart.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,14 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  username;
-  password;
 
-  constructor(private router: Router) {}
 
+  cat = {} as Cat;
+  cartList =[];
+
+  constructor(private cartDao: CartService, private router: Router) {
+
+    this.cartList = this.cartDao.getCart();
+    //this.router.navigateByUrl('detail');
+  }
+  submit(){
+    this.cartDao.addToCart(this.cat);
+    console.log('Cat List', this.cartDao.getCart());
+  }
   goNext(){
-    //console.log('Username: ' + this.username + ' Password: ' + this.password);
-    this.router.navigateByUrl('login');
- }
+
+    this.router.navigateByUrl('detail');
+
+  }
 
 }
