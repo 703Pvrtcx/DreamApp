@@ -1,7 +1,8 @@
-import { CartService } from './../services/cart/cart.service';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { CartService } from '../../app/services/cart.service';
+import { ModalController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
+import { CartviewPage } from './../../app/page/cartview/cartview.page'
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,23 +10,51 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
+  cart = [];
+  products = [];
+  cartItemCount: BehaviorSubject<number>;
 
-  cat = {} as Cat;
-  cartList =[];
+  @ViewChild('cart', {static: false, read: ElementRef})fab: ElementRef;
 
-  constructor(private cartDao: CartService, private router: Router) {
+  constructor(private cartService: CartService, private modalCtrl: ModalController) {}
 
-    this.cartList = this.cartDao.getCart();
-    //this.router.navigateByUrl('detail');
+  ngOnInit(){
+    this.products = this.cartService.getProducts();
+    this.cart = this.cartService.getCart();
+    this.cartItemCount = this.cartService.getCartItemCount();
+
   }
-  submit(){
-    this.cartDao.addToCart(this.cat);
-    console.log('Cat List', this.cartDao.getCart());
+
+  addToCart(product) {
+    this.cartService.addProduct(product);
+    this.animateCSS('tada');
   }
-  goNext(){
-
-    this.router.navigateByUrl('detail');
-
+ 
+  async openCart() {
+    this.animateCSS('bounceOutLeft', true);
+ 
+    let modal = await this.modalCtrl.create({
+      component: CartviewPage,
+      cssClass: 'cart-modal'
+    });
+    modal.onWillDismiss().then(() => {
+      this.fab.nativeElement.classList.remove('animated', 'bounceOutLeft')
+      this.animateCSS('bounceInLeft');
+    });
+    modal.present();
+  }
+ 
+  animateCSS(animationName, keepAnimated = false) {
+    const node = this.fab.nativeElement;
+    node.classList.add('animated', animationName)
+    
+    function handleAnimationEnd() {
+      if (!keepAnimated) {
+        node.classList.remove('animated', animationName);
+      }
+      node.removeEventListener('animationend', handleAnimationEnd)
+    }
+    node.addEventListener('animationend', handleAnimationEnd)
   }
 
 }

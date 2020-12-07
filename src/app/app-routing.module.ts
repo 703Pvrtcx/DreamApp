@@ -88,7 +88,15 @@ const routes: Routes = [
       },
       
     ]
+  },  {
+    path: 'cartview',
+    loadChildren: () => import('./page/cartview/cartview.module').then( m => m.CartviewPageModule)
   },
+  {
+    path: 'payments',
+    loadChildren: () => import('./page/payments/payments.module').then( m => m.PaymentsPageModule)
+  },
+
  
   
 ];

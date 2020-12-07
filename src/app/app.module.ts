@@ -12,15 +12,28 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { ItemListPage } from './page/Store/item-list/item-list.page';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [AppComponent, SidemenuPage, TabsPage, ItemListPage],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(),
+    AngularFireModule.initializeApp({         //<----ENTER FIREBASE CREDENTIAL HERE
+      apiKey: "",
+      authDomain: "",
+      databaseURL: "",
+      projectId: "",
+      storageBucket: "",
+      messagingSenderId: ""
+    }),        AppRoutingModule, HttpClientModule,
+    AngularFireAuthModule,AngularFirestoreModule,AngularFireDatabaseModule,
+  ],
   providers: [
     StatusBar,
-    SplashScreen,CartService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    SplashScreen,CartService, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,111 @@
-<ion-header>
+ <!-- <ion-header>
     <ion-toolbar color='primary'>
         <ion-buttons slot="start">
             <ion-menu-button>
-
+              <ion-icon name="apps"></ion-icon>
             </ion-menu-button>
         </ion-buttons>
         <ion-title>
             Delivery Service
         </ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear">
+                <ion-icon name="cart"></ion-icon>
+                 <ion-badge>0</ion-badge> 
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button>
+              <ion-icon name="apps"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
 
-<ion-content class="ion-padding">
+        
+      <ion-title>
+        Delivery Service App
+      </ion-title>
+  
+      <ion-button color="dark" size="small" slot="end" (click)="openCart()" #cart>
+        {{ cartItemCount | async }}
+        <ion-icon name="cart" slot="end"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+<ion-item lines="none">
+
+    <ion-avatar slot="start">
+    </ion-avatar>
+        <ion-label>
+            <p>Hello,</p>
+            <h3>Username</h3>
+        </ion-label>
+
+</ion-item>
+<ion-searchbar  placeholder="Search in.."></ion-searchbar>
+
+<ion-content [fullscreen]="true">
+    <ion-list>
+      <ion-card *ngFor="let item of products">
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="6">
+                <ion-col >
+                    <img src="https://via.placeholder.com/300x300">
+                </ion-col>
+                <ion-label color="secondary">
+                  <b>{{ item.price | currency: 'USD' }}</b>
+                </ion-label>
+                
+              </ion-col>
+              <ion-col size="4" class="ion-text-right">
+                <ion-button color="dark" size="small" (click)="addToCart(item)">
+                  +
+                  <ion-icon name="cart" slot="end"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+      </ion-card>
+    </ion-list>
+  
+    
+  </ion-content>
+
+<!-- <ion-content>
+
+  <div *ngFor="let cat of items" class="category-block">
+    <ion-label align-self-center>{{ cat.category }} </ion-label>
+    <ion-list>  
+      <ion-card *ngFor="let product of cat.products">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+            <ion-col >
+                <img src="https://via.placeholder.com/300x300">
+            </ion-col>
+            <ion-col class="ion-text-end">
+              <h3>{{product.name}} {{product.price  | currency:'R':'symbol'}} </h3>
+              <ion-label> Description: </ion-label>
+            </ion-col>
+
+            <ion-button (click)="addToCart(product)"> + </ion-button>
+        </ion-row>
+    </ion-grid>
+        </ion-card>
+      </ion-list>
+     
+    </div>
+</ion-content> -->
+
+
+
+<!-- <ion-content class="ion-padding">
 
 
     <ion-item>
@@ -44,5 +138,6 @@
         </div>
     </div>
 
+  
 
-</ion-content>
+</ion-content> -->
